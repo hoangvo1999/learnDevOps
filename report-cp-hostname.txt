@@ -1,0 +1,19 @@
+echo "HOSTNAME: $(hostname)" > /home/$(whoami)/report-$(hostname).txt
+echo "DATE REPORT: $(date '+%Y-%m-%d %H:%M:%S')" >> /home/$(whoami)/report-$(hostname).txt
+echo -e "\nThong tin he thong cua thiet bi" >> /home/$(whoami)/report-$(hostname).txt
+echo -e "\nCPU Specs:" >> /home/$(whoami)/report-$(hostname).txt
+echo "=============" >> /home/$(whoami)/report-$(hostname).txt
+lscpu >> /home/$(whoami)/report-$(hostname).txt
+echo -e "\nHardware Spec:" >> /home/$(whoami)/report-$(hostname).txt
+echo "=============" >> /home/$(whoami)/report-$(hostname).txt
+sudo lshw -short >> /home/$(whoami)/report-$(hostname).txt 
+echo -e "\nLSDEV:" >> /home/$(whoami)/report-$(hostname).txt
+echo "=============" >> /home/$(whoami)/report-$(hostname).txt
+lsblk >> /home/$(whoami)/report-$(hostname).txt
+echo -e "\nNetwork Info:" >> /home/$(whoami)/report-$(hostname).txt
+echo "=============" >> /home/$(whoami)/report-$(hostname).txt
+echo -n "IP Address: " >> /home/$(whoami)/report-$(hostname).txt
+hostname -I | awk '{print $1}' >> /home/$(whoami)/report-$(hostname).txt 
+echo -n "MAC ADDRESS: " >> /home/$(whoami)/report-$(hostname).txt
+ip link show | grep ether | awk '{print $2}' >> /home/$(whoami)/report-$(hostname).txt
+
